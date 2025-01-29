@@ -1,0 +1,48 @@
+[
+  {
+    "originalPrice": 0,
+    "discountedPrice": 0,
+    "_id": "6799cbf89eebe1c74d43987c",
+    "clientFK": "6799cb5d97c3ca61c8a39e3e",
+    "category": "pizza",
+    "imgURL": "https://photos.app.goo.gl/863eHeu416BkVaGC9",
+    "name": "Tikka Pizza",
+    "description": "Veniam debitis quaerat officiis quasi cupiditate quo, quisquam velit, magnam voluptatem repellendus sed eaque",
+    "sizes": [
+      {
+        "name": "Small",
+        "discountedPrice": 340,
+        "originalPrice": 580,
+        "extraToppingPrice": 180,
+        "_id": "6799cbf89eebe1c74d43987d"
+      },
+      {
+        "name": "Medium",
+        "discountedPrice": 0,
+        "originalPrice": 1150,
+        "extraToppingPrice": 210,
+        "_id": "6799cbf89eebe1c74d43987e"
+      },
+      {
+        "name": "Large",
+        "discountedPrice": 340,
+        "originalPrice": 1550,
+        "extraToppingPrice": 250,
+        "_id": "6799cbf89eebe1c74d43987f"
+      }
+    ],
+    "__v": 0
+  },
+  {
+    "_id": "6799d3a62ae55828b5949481",
+    "clientFK": "6799cb5d97c3ca61c8a39e3e",
+    "category": "burger",
+    "imgURL": "https://photos.app.goo.gl/M1qn9qJpZMYrpfDJ8",
+    "name": "Zinger Burger",
+    "description": "Veniam debitis quaerat officiis quasi cupiditate quo, quisquam velit, magnam voluptatem repellendus sed eaque",
+    "originalPrice": 350,
+    "discountedPrice": 300,
+    "sizes": [],
+    "__v": 0
+  }
+]

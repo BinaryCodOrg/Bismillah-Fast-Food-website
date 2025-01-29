@@ -1,0 +1,106 @@
+:root {
+  --primary-color: #ffbe33;
+  --secondary-color: #fff;
+  --third-color: #000;
+}
+
+.c_buttton {
+  border-radius: 25px;
+  background-color: var(--primary-color);
+  color: var(--third-color);
+  min-width: 10rem;
+  :is(&:hover, &:focus, &:active) {
+    background-color: var(--third-color);
+    color: var(--primary-color);
+  }
+}
+
+.subscribe_form .form-control {
+  box-shadow: none;
+  border-color: var(--primary-color);
+}
+
+.btn-primary {
+  color: var(--secondary-color) !important;
+  background-color: var(--primary-color) !important;
+  border: var(--primary-color) !important;
+  box-shadow: none;
+  &&:is(:hover, :focus, :active) {
+    color: var(--primary-color) !important;
+    background-color: var(--third-color) !important;
+    border: var(--third-color) !important;
+  }
+}
+
+.modal-dialog {
+  max-width: 50%;
+  margin: 1.75rem auto;
+}
+
+.modal a {
+  color: var(--primary-color) !important;
+  background-color: var(--secondary-color) !important;
+  border: 1px solid var(--primary-color) !important;
+  padding: 0.5rem 0.5rem;
+  &&:is(:hover, :focus, :active) {
+    color: var(--secondary-color) !important;
+    background-color: var(--primary-color) !important;
+    border: 1px solid var(--primary-color) !important;
+    padding: 0.5rem 0.5rem;
+  }
+}
+
+.modal a.active {
+  color: var(--secondary-color) !important;
+  background-color: var(--primary-color) !important;
+  border: 1px solid var(--primary-color) !important;
+  padding: 0.5rem 0.5rem;
+}
+
+
+.tooltip-container {
+  position: relative;
+  display: inline-block !important;
+  cursor: help;
+}
+
+
+/* Tooltip styles */
+.tooltip {
+  visibility: hidden;
+  position: absolute;
+  bottom: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 8px 12px;
+  background-color: #333;
+  color: white;
+  text-align: center;
+  border-radius: 6px;
+  width: max-content;
+  max-width: 200px;
+  font-size: 14px;
+  line-height: 1.4;
+  margin-bottom: 8px;
+  opacity: 0;
+  transition: opacity 0.2s ease, visibility 0.2s ease;
+  z-index: 1000;
+}
+
+/* Arrow at the bottom of tooltip */
+.tooltip::after {
+  content: "";
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  margin-left: -5px;
+  border-width: 5px;
+  border-style: solid;
+  border-color: #333 transparent transparent transparent;
+}
+
+/* Show tooltip on hover */
+.tooltip-container:hover .tooltip {
+  visibility: visible;
+  opacity: 1;
+}
