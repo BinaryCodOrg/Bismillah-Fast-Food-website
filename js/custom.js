@@ -81,41 +81,45 @@ function toSentenceCase(text) {
     .replace(/(^\s*\w|[.!?]\s*\w)/g, (match) => match.toUpperCase());
 }
 
-let itemsArray = [{
-  "originalPrice": 0, "discountedPrice": 0, "_id":
-    "6799cbf89eebe1c74d43987c", "clientFK": "6799cb5d97c3ca61c8a39e3e",
-  "category": "pizza", "imgURL": "https://bismillahfastfood.com/images/f1.png", "name": "Tikka Pizza", "description": "Veniam debitis quaerat officiis quasi cupiditate quo, quisquam velit, magnam voluptatem repellendus sed eaque", "sizes": [{ "name": "Small", "discountedPrice": 340, "originalPrice": 580, "extraToppingPrice": 180, "_id": "6799cbf89eebe1c74d43987d" }, { "name": "Medium", "discountedPrice": 0, "originalPrice": 1150, "extraToppingPrice": 210, "_id": "6799cbf89eebe1c74d43987e" }, { "name": "Large", "discountedPrice": 340, "originalPrice": 1550, "extraToppingPrice": 250, "_id": "6799cbf89eebe1c74d43987f" }], "__v": 0
-}, { "_id": "6799d3a62ae55828b5949481", "clientFK": "6799cb5d97c3ca61c8a39e3e", "category": "burger", "imgURL": "https://bismillahfastfood.com/images/f2.png", "name": "Zinger Burger", "description": "Veniam debitis quaerat officiis quasi cupiditate quo, quisquam velit, magnam voluptatem repellendus sed eaque", "originalPrice": 350, "discountedPrice": 300, "sizes": [], "__v": 0 }]
+let itemsArray = [
+  // { "_id": "679a7f65b6553206d000a035", "clientFK": "6799c7a94fe4be605866704b", "category": "pizza", "imgURL": "https://bismillahfastfood.com/images/f1.png", "name": "Tikka Pizza", "description": "Veniam debitis quaerat officiis quasi cupiditate quo, quisquam velit, magnam voluptatem repellendus sed eaque", "sizes": [{ "name": "Small", "discountedPrice": 340, "originalPrice": 580, "extraToppingPrice": 180 }, { "name": "Medium", "discountedPrice": 0, "originalPrice": 1150, "extraToppingPrice": 210 }, { "name": "Large", "discountedPrice": 340, "originalPrice": 1550, "extraToppingPrice": 250 }], "originalPrice": 0, "discountedPrice": 0, "__v": 0 }
+]
+let AddOnes = []
+let DealsArray = []
 
 async function getItems() {
   try {
-    const response = await fetch('http://localhost:3000/api/BismillahAllInOne', {
+    const response = await fetch('http://localhost:3000/api/allInOne/' + "6799c7a94fe4be605866704b", {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
-        // 'Authorization': `Bearer ${localStorage.getItem('authToken')}`
-        'Authorization': `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJVc2VyaW5mbyI6eyJfaWQiOiI2Nzk5YzdhOTRmZTRiZTYwNTg2NjcwNGIiLCJmaXJzdE5hbWUiOiJVc2FtYSIsImxhc3ROYW1lIjoiRmFoZWVtIiwiZW1haWwiOiJ3b3JrQGJpbmFyeWNvZC5jb20iLCJwYXNzd29yZCI6IiQyYiQxMCRnMTllVHRoNC9vcFptai5OTFBhSUUub2lNd0RlbTVLUkNjY0NiYXBSRXZ2Mk9BbHNCWi8wNiIsImdlbmRlciI6Im1hbGUiLCJwaG9uZSI6IjAzMTIyNDUxMzU3NiIsIlJvbGwiOiJjbGllbnQiLCJzdWJzY3JpcHRpb24iOiJGb3JldmVyIiwicmVmcmVzaFRva2VuIjoiZXlKaGJHY2lPaUpJVXpJMU5pSXNJblI1Y0NJNklrcFhWQ0o5LmV5SnBaQ0k2SWpZM09UbGpOMkU1TkdabE5HSmxOakExT0RZMk56QTBZaUlzSW1saGRDSTZNVGN6T0RFek1qa3dOaXdpWlhod0lqb3hOek00TlRZME9UQTJmUS5HTlk4V3I0VFpEQ1QxaWFFSFlTWEdsLWVDNGFmbFVlRHFHWFN0VVZNT2YwIiwiX192IjowfSwiaWF0IjoxNzM4MTQyOTE2LCJleHAiOjE3MzgxNTAxMTZ9.tTkVeZZqedqB4fJqgccQwYzz7CWw81foWn0q_Y4qGwg`
       }
     });
     if (!response.ok) {
       throw new Error('Network response was not ok');
     }
     const data = await response.json();
-    console.log(JSON.stringify(data));
-    // itemsArray.push(data);
-    data.forEach((item) => renderCard(item));
+    // console.log(JSON.stringify(data));
+
+    itemsArray = data.menu;
+    AddOnes = data.addon;
+    DealsArray = data.deal;
+
+    data.menu.forEach((item) => renderCard(item));
+    data.deal.forEach((deal) => renderDeals(deal));
+
   } catch (error) {
     console.error('There has been a problem with your fetch operation:', error);
   }
 }
 
 getItems();
-itemsArray.forEach((item) => renderCard(item));
+
+// itemsArray.forEach((item) => renderCard(item));
 
 // Render all items
 
 function renderCard(item) {
-  alert("renderCard")
   // Get the container where the cards will be appended
   const container = document.getElementById("CardRender");
 
@@ -256,48 +260,16 @@ function renderCard(item) {
   container.appendChild(card);
 }
 
-let AddOnes = [
-  {
-    id: "12kdjalk",
-    category: "Dip",
-    name: "Dip souse",
-    sizes: 80,
-  },
-  {
-    id: "98712",
-    category: "bread",
-    name: "Bread",
-    sizes: 50,
-  },
-  {
-    id: "98712",
-    category: "drink",
-    name: "pepsi",
-    sizes: [
-      { name: "Regular", prize: 70, },
-      { name: "Half", prize: 130, },
-      { name: "1.5 ltr", prize: 240, },
-    ],
-  },
-  {
-    id: "98712",
-    category: "drink",
-    name: "water",
-    sizes: [
-      { name: "Half", prize: 70, },
-      { name: "Large", prize: 140, },
-    ],
-  }
-]
-
 function openModal(id) {
   // alert(id)
 
   var parts = id.split('-');
   var category = parts[1];
   var itemId = parts[0];
+
   console.log('Category:', category);
   console.log('itemId:', itemId);
+  console.log('itemsArray:', itemsArray);
 
   let Modal = document.getElementById("modelId");
   const modalTitle = Modal.querySelector('.modal-title'); // Access the title
@@ -354,9 +326,9 @@ function pizzaDisplay(item, modalBody) {
                         <div class="d-flex justify-content-left align-items-center" style="width: 100%; gap: 10px;">
                         ${sizes.map(size => {
     if (size.name === sizes[0].name) {
-      return (`<a class="active" type="button">${size.name}</a>`);
+      return (`<a class="active" type="button" id="${size.name}" onclick="changeSize(this.id,${size})">${size.name}</a>`);
     } else {
-      return (`<a type="button">${size.name}</a>`);
+      return (`<a type="button" id="${size.name}" onclick="changeSize(this.id,${size})">${size.name}</a>`);
     }
   }).join('')}
                         </div>
@@ -481,29 +453,8 @@ function burgerDisplay(item, modalBody) {
   modalBody.innerHTML = sizesHtml;
 }
 
-let DealsArray = [
-  {
-    id: "12kdjal",
-    category: "burger",
-    imgURL: "../images/o1.jpg",
-    name: "Deal 1",
-    items: ["5 Zinger Burgers", "1 Large Fries", "1 (1.5 liter) Drink"],
-    originalPrice: 1000,
-  },
-  {
-    id: "12kdjal89",
-    category: "pizza",
-    imgURL: "../images/f3.png",
-    name: "Deal 2",
-    items: ["5 Zinger Burgers", "1 Large Fries", "1 (1.5 liter) Drink"],
-    originalPrice: 500,
-  },
-]
-
 // Get the container where the cards will be rendered
 const cardContainer = document.getElementById("DealsRender");
-
-DealsArray.forEach((deal) => renderDeals(deal));
 
 function renderDeals(deal) {
   // Construct the card HTML
@@ -588,4 +539,22 @@ function renderDeals(deal) {
 
   // Append the card to the container
   cardContainer.innerHTML += cardHTML;
+}
+
+function changeSize(selectedSize, size) {
+  console.log(selectedSize, size);
+
+  // Remove "active" class from all size buttons
+  size.forEach(item => {
+    const btn = document.getElementById(item.name);
+    if (btn) {
+      btn.classList.remove("active");
+    }
+  });
+
+  // Add "active" class to the selected button
+  const selectedBtn = document.getElementById(selectedSize);
+  if (selectedBtn) {
+    selectedBtn.classList.add("active");
+  }
 }
